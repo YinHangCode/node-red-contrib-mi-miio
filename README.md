@@ -4,13 +4,13 @@
 
 这是一个Node-RED的小米MiIO设备的插件。
    
-Bug反馈/建议等请提交[issues](https://github.com/YinHangCode/node-red-contrib-weather/issues) 或 [QQ群: 107927710](//shang.qq.com/wpa/qunwpa?idkey=8b9566598f40dd68412065ada24184ef72c6bddaa11525ca26c4e1536a8f2a3d)。
+Bug反馈/建议等请提交[issues](https://github.com/YinHangCode/node-red-contrib-mi-miio/issues) 或 [QQ群: 107927710](//shang.qq.com/wpa/qunwpa?idkey=8b9566598f40dd68412065ada24184ef72c6bddaa11525ca26c4e1536a8f2a3d)。
 
 ## 支持设备
 ||设备名称|Device Name|MiIO model|
 |:-:|:-|:-|:-|
-|1|米家智能插线板|zimi.powerstrip.v2|
-|2|Yeelight彩光灯带|yeelink.light.strip1<br>yeelink.light.strip2|
+|1|米家智能插线板|MiIntelligencePinboard|zimi.powerstrip.v2|
+|2|Yeelight彩光灯带|YeelightColorLedStrip|yeelink.light.strip1<br>yeelink.light.strip2|
 
 更多设备待添加中。。。
 
@@ -43,7 +43,7 @@ npm install -g node-red-contrib-mi-miio
     "cmd": "get"
 }
 ```
-![](https://raw.githubusercontent.com/YinHangCode/node-red-contrib-mi-miio/master/images/get.png)
+![](https://raw.githubusercontent.com/YinHangCode/node-red-contrib-mi-miio/master/images/get.png)   
 输出内容：
 ```
 {
@@ -66,7 +66,7 @@ npm install -g node-red-contrib-mi-miio
     "value": "要修改的值"
 }
 ```
-![](https://raw.githubusercontent.com/YinHangCode/node-red-contrib-mi-miio/master/images/set.png)
+![](https://raw.githubusercontent.com/YinHangCode/node-red-contrib-mi-miio/master/images/set.png)   
 输出内容：
 ```
 {
@@ -85,7 +85,7 @@ npm install -g node-red-contrib-mi-miio
     "newValue": 变动后的值
 }
 ```
-![](https://raw.githubusercontent.com/YinHangCode/node-red-contrib-mi-miio/master/images/set.png)
+![](https://raw.githubusercontent.com/YinHangCode/node-red-contrib-mi-miio/master/images/report.png)
 
 ## 与Dashboard配合的例子
 ![](https://raw.githubusercontent.com/YinHangCode/node-red-contrib-mi-miio/master/images/example1_1.png)
