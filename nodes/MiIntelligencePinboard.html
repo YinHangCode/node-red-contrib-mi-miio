@@ -1,0 +1,74 @@
+<!-- 米家智能插线板 -->
+<!-- Mi-MiIntelligencePinboard -->
+<!-- zimi.powerstrip.v2 -->
+
+<script type="text/javascript">
+    RED.nodes.registerType('Mi-MiIntelligencePinboard-Device', {
+        category: 'config',
+        defaults: {
+            deviceName: { value: "" },
+            deviceIP: { value: "", required: true, validate: RED.validators.regex(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/) },
+            deviceToken: { value: "", required: true },
+            deviceSyncInterval: { value: "0", validate:RED.validators.regex(/[0-9]+/) }
+        },
+        label: function () {
+            return this.deviceName || this.deviceIP;
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Mi-MiIntelligencePinboard-Device">
+    <div class="form-row">
+        <label for="node-config-input-deviceName"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-config-input-deviceName" placeholder="Device Name">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-deviceIP"><i class="fa fa-location-arrow"></i> IP</label>
+        <input type="text" id="node-config-input-deviceIP" placeholder="Device IP">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-deviceToken"><i class="fa fa-key"></i> Token</label>
+        <input type="text" id="node-config-input-deviceToken" placeholder="Device Token">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-deviceSyncInterval"><i class="fa fa-clock-o"></i> Interval(ms)</label>
+        <input type="text" id="node-config-input-deviceSyncInterval" placeholder="Device Synchronization Interval">
+    </div>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('Mi-MiIntelligencePinboard',{
+        category: 'Mi',
+        color: '#66CCFF',
+        defaults: {
+            name: { value: "" },
+            device: { type: "Mi-MiIntelligencePinboard-Device", required: true }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "Mi-MiIntelligencePinboard.png",
+        paletteLabel: function() {
+            return this._("Mi-MiIntelligencePinboard.node_list.label.name");
+        },
+        label: function() {
+            return this.name || this._("Mi-MiIntelligencePinboard.node_list.label.name");
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Mi-MiIntelligencePinboard">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-device"><i class="fa fa-cog"></i> Device</label>
+        <input type="text" id="node-input-device">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Mi-MiIntelligencePinboard">
+    <p>XiaoMi MiIntelligencePinboard from node-red-contrib-mi-miio By hang.yin</p>
+    <p>For more information, please refer to <a href='https://github.com/YinHangCode/node-red-contrib-mi-miio' target='_blank'>GitHub</a> or <a href="//shang.qq.com/wpa/qunwpa?idkey=8b9566598f40dd68412065ada24184ef72c6bddaa11525ca26c4e1536a8f2a3d" target='_blank'>QQ Group: 107927710</a></p>
+</script>
+

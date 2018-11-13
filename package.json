@@ -1,0 +1,22 @@
+{
+  "name": "node-red-contrib-mi-miio",
+  "version": "0.0.1",
+  "description": "Node-RED contrib for mi miio device.",
+  "author": "hang.yin",
+  "keywords": [
+    "Node-RED",
+    "node-red-contrib",
+    "xiaomi",
+    "mi",
+    "miio"
+  ],
+  "node-red": {
+    "nodes": {
+      "MiIntelligencePinboard": "nodes/MiIntelligencePinboard.js",
+      "YeelightColorLedStrip": "nodes/YeelightColorLedStrip.js"
+    }
+  },
+  "dependencies": {
+    "miio": "0.14.1"
+  }
+}
