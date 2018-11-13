@@ -1,31 +1,97 @@
-# node-red-contrib-weather
+# node-red-contrib-mi-miio
 
-[![npm version](https://badge.fury.io/js/node-red-contrib-weather.svg)](https://badge.fury.io/js/node-red-contrib-weather)
+[![npm version](https://badge.fury.io/js/node-red-contrib-mi-miio.svg)](https://badge.fury.io/js/node-red-contrib-mi-miio)
 
-这是一个Node-RED的天气插件。
-   
-天气数据取自小米。
+这是一个Node-RED的小米MiIO设备的插件。
    
 Bug反馈/建议等请提交[issues](https://github.com/YinHangCode/node-red-contrib-weather/issues) 或 [QQ群: 107927710](//shang.qq.com/wpa/qunwpa?idkey=8b9566598f40dd68412065ada24184ef72c6bddaa11525ca26c4e1536a8f2a3d)。
 
-## 感谢
-第一个Node-RED插件，感谢一下萝卜大佬，哈哈。
+## 支持设备
+||设备名称|Device Name|MiIO model|
+|:-:|:-|:-|:-|
+|1|米家智能插线板|zimi.powerstrip.v2|
+|2|Yeelight彩光灯带|yeelink.light.strip1<br>yeelink.light.strip2|
+
+更多设备待添加中。。。
 
 ## 安装
 确认安装好Node-RED之后，执行如下命令：
 ```
-npm install -g node-red-contrib-weather
+npm install -g node-red-contrib-mi-miio
 ```
 
-## 说明
-流程图中填写经度和纬度即可。
-   
-给进任意输入，即可输出所有的天气信息供给后续的流程使用。
-   
-例如：每24小时触发一次，后面接判断流程做对应的操作。
+## 输入/输出消息说明
+### 获取设备属性列表
+输入内容：
+```
+{
+    "cmd": "list"
+}
+```
+![](https://raw.githubusercontent.com/YinHangCode/node-red-contrib-mi-miio/master/images/list.png)
+输出内容：
+```
+{
+    "cmd": "list_response",
+    "attributes": ["power", "power_consume_rate", "temperature", "wifi_led"]
+}
+```
+### 获取设备属性值
+输入内容：
+```
+{
+    "cmd": "get"
+}
+```
+![](https://raw.githubusercontent.com/YinHangCode/node-red-contrib-mi-miio/master/images/get.png)
+输出内容：
+```
+{
+    "cmd": "get_response",
+    "values": {
+        "power": "off",
+        "power_consume_rate": 0,
+        "temperature": 41.11,
+        "wifi_led": "on"
+    },
+    "msg": "success"
+}
+```
+### 修改设备属性值
+输入内容：
+```
+{
+    "cmd": "set",
+    "attribute": "要修改的属性",
+    "value": "要修改的值"
+}
+```
+![](https://raw.githubusercontent.com/YinHangCode/node-red-contrib-mi-miio/master/images/set.png)
+输出内容：
+```
+{
+    "cmd": "set_response",
+    "result": "success",
+    "msg":["ok"]
+}
+```
+### 属性值变动通知
+当某个属性的值有变动时，通知如下消息：
+```
+{
+    "cmd": "report",
+    "attribute": "值变动的属性",
+    "oldValue": 变动前的值,
+    "newValue": 变动后的值
+}
+```
+![](https://raw.githubusercontent.com/YinHangCode/node-red-contrib-mi-miio/master/images/set.png)
+
+## 与Dashboard配合的例子
+![](https://raw.githubusercontent.com/YinHangCode/node-red-contrib-mi-miio/master/images/example1_1.png)
+![](https://raw.githubusercontent.com/YinHangCode/node-red-contrib-mi-miio/master/images/example1_2.png)
    
 ## 版本说明
-### 0.0.2 (2018-11-08)
-1. 修改输出数据由String类型变更为Object类型，方便后续使用。   
-### 0.0.1 (2018-11-08)
-1. 初版，获取天气信息。   
+### 0.0.1 (2018-11-13)
+1. 增加支持米家智能插线板。   
+2. 增加支持Yeelight彩光灯带。   
