@@ -1,0 +1,9 @@
+{
+  "Mi-ZhiMiDCVariableFrequencyFan": {
+    "node_list": {
+      "label": {
+        "name": "ZhiMiDCVariableFrequencyFan"
+      }
+    }
+  }
+}

@@ -11,7 +11,18 @@ module.exports = function(RED) {
         }
         
         getAttributeList() {
-            return ["power", "bright", "ct", "rgb", "sat"];
+            return [
+                "power",
+                "bright",
+                "rgb",
+                "ct",
+                "hue",
+                "sat",
+                "color_mode",
+//              "name",
+                "lan_ctrl",
+//              "save_state"
+            ];
         }
         
         getAttributeSetter() {

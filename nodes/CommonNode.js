@@ -17,6 +17,8 @@ class CommonNode {
                 node.cmdSet(node, msg);
             } else if('list' == cmd) {
                 node.cmdList(node, msg);
+            } else if('miio' == cmd) {
+                node.cmdMiio(node, msg);
             } else {
                 node.send({
                     'payload':{
@@ -78,8 +80,6 @@ class CommonNode {
     }
     
     cmdSet(node, msg) {
-        var that = this;
-
         var attribute = msg.payload['attribute'];
         if(null == attribute || attribute == "") {
             node.send({
@@ -92,7 +92,7 @@ class CommonNode {
         }
                 
         var value = msg.payload['value'];
-        if(null == value || value == "") {
+        if(null == value) {
             node.send({
                 'payload':{
                     'cmd': 'error',
@@ -103,7 +103,7 @@ class CommonNode {
         }
         
         var setter = this.deviceNode.getAttributeSetter()[attribute];
-        if(null == value) {
+        if(null == setter) {
             node.send({
                 'payload':{
                     'cmd': 'error',
@@ -133,16 +133,10 @@ class CommonNode {
                 }
             });
             
-            node.send({
-                'payload': {
-                    'cmd': 'report',
-                    'attribute': attribute,
-                    'oldValue': that.deviceNode.attributes[attribute],
-                    'newValue': value
-                }
-            });
+            var reportMsg = node.getCmdSetReportMsg(node, msg);
+            node.send(reportMsg);
             
-            that.deviceNode.attributes[attribute] = value;
+            node.updateCmdSetAttributes(node, msg, attribute, value);
         }).catch(function(err) {
             node.send({
                 'payload': {
@@ -154,12 +148,54 @@ class CommonNode {
         });
     }
     
+    getCmdSetReportMsg(node, msg) {
+        var attribute = msg.payload['attribute'];
+        var value = msg.payload['value'];
+        
+        var newAttributes = Object.assign({}, node.deviceNode.attributes);
+        newAttributes[attribute] = value;
+        return {
+            'payload': {
+                'cmd': 'report',
+                'attributes': [attribute],
+                'oldValues': node.deviceNode.attributes,
+                'newValues': newAttributes
+            }
+        };
+    }
+    
+    updateCmdSetAttributes(node, msg, attribute, value) {
+        node.deviceNode.attributes[attribute] = value;
+    }
+    
     cmdList(node, msg) {
         node.send({
             'payload':{
                 'cmd': 'list_response',
                 'attributes': this.deviceNode.getAttributeList()
             }
+        });
+    }
+    
+    cmdMiio(node, msg) {
+        var method = msg.payload['method'];
+        var value = msg.payload['value'];
+        node.deviceNode.device.call(method, value).then(result => {
+            node.send({
+                'payload': {
+                    'cmd': 'miio_response',
+                    'result': 'success',
+                    'msg': result
+                }
+            });
+        }).catch(function(err) {
+            node.send({
+                'payload': {
+                    'cmd': 'miio_response',
+                    'result': 'fail',
+                    'msg': err
+                }
+            });
         });
     }
 };

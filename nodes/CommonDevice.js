@@ -36,23 +36,29 @@ class CommonDevice {
         this.device.call("get_prop", attributeList, {
             'options.retries': 1
         }).then(result => {
+            var changeAttributes = [];
+            var newAttributes = {};
             for(var index in attributeList) {
                 var attribute = attributeList[index];
+                newAttributes[attribute] = result[index];
                 if(that.attributes[attribute] != result[index]) {
-                    for(var node in that.nodes) {
-                        that.nodes[node].send({
-                            'payload': {
-                                'cmd': 'report',
-                                'attribute': attribute,
-                                'oldValue': that.attributes[attribute],
-                                'newValue': result[index]
-                            }
-                        });
-                    }
-                    that.attributes[attribute] = result[index];
+                    changeAttributes.push(attribute);
                 }
             }
             
+            if(changeAttributes.length > 0) {
+                for(var node in that.nodes) {
+                    that.nodes[node].send({
+                        'payload': {
+                            'cmd': 'report',
+                            'attributes': changeAttributes,
+                            'oldValues': that.attributes,
+                            'newValues': newAttributes
+                        }
+                    });
+                }
+                that.attributes = newAttributes;
+            }
             that.online = true;
             for(var node in that.nodes) {
                 that.nodes[node].status({fill:"green", shape:"dot", text: JSON.stringify(that.attributes) });
