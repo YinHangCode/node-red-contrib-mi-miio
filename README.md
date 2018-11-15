@@ -78,12 +78,23 @@ npm install -g node-red-contrib-mi-miio
 ```
 ### 属性值变动通知
 当某个属性的值有变动时，通知如下消息：
+attributes为值有变动的属性，oldValues为变动前个属性的值，newValues为变动后个属性的值。
 ```
 {
-    "cmd": "report",
-    "attribute": "值变动的属性",
-    "oldValue": 变动前的值,
-    "newValue": 变动后的值
+	"cmd": "report",
+	"attributes": ["power", "temperature"],
+	"oldValues": {
+		"power": "on",
+		"power_consume_rate": 0,
+		"temperature": 49.66,
+		"wifi_led": "on"
+	},
+	"newValues": {
+		"power": "off",
+		"power_consume_rate": 0,
+		"temperature": 49.59,
+		"wifi_led": "on"
+	}
 }
 ```
 ![](https://raw.githubusercontent.com/YinHangCode/node-red-contrib-mi-miio/master/images/report.png)
@@ -100,8 +111,9 @@ npm install -g node-red-contrib-mi-miio
 ```
    
 ## 版本说明
-### 0.0.2 (2018-11-14)
+### 0.0.2 (2018-11-15)
 1. 增加支持智米直流变频落地扇。   
+2. 因为某些情况下需要多个属性同时计算，不得不修改report的格式规则。   
 ### 0.0.1 (2018-11-13)
 1. 增加支持米家智能插线板。   
 2. 增加支持Yeelight彩光灯带。   
