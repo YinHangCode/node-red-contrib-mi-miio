@@ -81,20 +81,20 @@ npm install -g node-red-contrib-mi-miio
 attributes为值有变动的属性，oldValues为变动前个属性的值，newValues为变动后个属性的值。
 ```
 {
-	"cmd": "report",
-	"attributes": ["power", "temperature"],
-	"oldValues": {
-		"power": "on",
-		"power_consume_rate": 0,
-		"temperature": 49.66,
-		"wifi_led": "on"
-	},
-	"newValues": {
-		"power": "off",
-		"power_consume_rate": 0,
-		"temperature": 49.59,
-		"wifi_led": "on"
-	}
+    "cmd": "report",
+    "attributes": ["power", "temperature"],
+    "oldValues": {
+        "power": "on",
+        "power_consume_rate": 0,
+        "temperature": 49.66,
+        "wifi_led": "on"
+    },
+    "newValues": {
+        "power": "off",
+        "power_consume_rate": 0,
+        "temperature": 49.59,
+        "wifi_led": "on"
+    }
 }
 ```
 ![](https://raw.githubusercontent.com/YinHangCode/node-red-contrib-mi-miio/master/images/report.png)
