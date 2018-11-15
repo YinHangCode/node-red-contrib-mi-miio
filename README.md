@@ -73,7 +73,7 @@ npm install -g node-red-contrib-mi-miio
 {
     "cmd": "set_response",
     "result": "success",
-    "msg":["ok"]
+    "msg": ["ok"]
 }
 ```
 ### 属性值变动通知
