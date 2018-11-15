@@ -78,6 +78,7 @@ npm install -g node-red-contrib-mi-miio
 ```
 ### 属性值变动通知
 当某个属性的值有变动时，通知如下消息：
+   
 attributes为值有变动的属性，oldValues为变动前个属性的值，newValues为变动后个属性的值。
 ```
 {
