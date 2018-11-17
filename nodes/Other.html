@@ -1,0 +1,117 @@
+<!-- 自定义 -->
+
+<script type="text/javascript">
+    RED.nodes.registerType('Mi-Other-Device', {
+        category: 'config',
+        defaults: {
+            deviceName: { value: "" },
+            deviceIP: { value: "", required: true, validate: RED.validators.regex(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/) },
+            deviceToken: { value: "", required: true },
+            deviceSyncInterval: { value: "0", validate:RED.validators.regex(/[0-9]+/) },
+            deviceAttributesArr: { value: [] }
+        },
+        label: function () {
+            return this.deviceName || this.deviceIP;
+        },
+        oneditprepare: function() {
+            $('#node-config-input-deviceAttributes-container').css('min-height','200px').css('min-width','400px').editableList({
+                addItem: function(container, i, opt) {
+                    var row = $('<div/>').appendTo(container);
+
+                    var attribute = $('<input/>', {style: "margin:3px 3px 3px 8px;width:45%", class:"node-config-input-deviceAttributes-container-attribute", type:"text"})
+                        .appendTo(row).typedInput({types:['str']});
+                    var setter = $('<input/>', {style: "margin:3px 3px 3px 8px;width:45%", class:"node-config-input-deviceAttributes-container-setter", type:"text"})
+                        .appendTo(row).typedInput({types:['str']});
+                    
+                    attribute.typedInput('value', opt.attribute);
+                    setter.typedInput('value', opt.setter);
+                },
+                removable: true,
+                sortable: true
+            });
+
+            for (var i=0; i < this.deviceAttributesArr.length; i++) {
+                var deviceAttribute = this.deviceAttributesArr[i];
+                $("#node-config-input-deviceAttributes-container").editableList('addItem', deviceAttribute);
+            }
+        },
+        oneditsave: function() {
+            var attributes = $("#node-config-input-deviceAttributes-container").editableList('items');
+            var that = this;
+            this.deviceAttributesArr = [];
+            attributes.each(function(i) {
+                var attributeItem = $(this);
+                var attribute = {
+                    'attribute': attributeItem.find(".node-config-input-deviceAttributes-container-attribute").typedInput('value'),
+                    'setter': attributeItem.find(".node-config-input-deviceAttributes-container-setter").typedInput('value')
+                };
+                that.deviceAttributesArr.push(attribute);
+            });
+        },
+        oneditresize: function(size) {
+            var height = size.height;
+            height -= 230;
+            $("#node-config-input-deviceAttributes-container").editableList('height',height);
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Mi-Other-Device">
+    <div class="form-row">
+        <label for="node-config-input-deviceName"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-config-input-deviceName" placeholder="Device Name">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-deviceIP"><i class="fa fa-location-arrow"></i> IP</label>
+        <input type="text" id="node-config-input-deviceIP" placeholder="Device IP">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-deviceToken"><i class="fa fa-key"></i> Token</label>
+        <input type="text" id="node-config-input-deviceToken" placeholder="Device Token">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-deviceSyncInterval"><i class="fa fa-clock-o"></i> Interval(ms)</label>
+        <input type="text" id="node-config-input-deviceSyncInterval" placeholder="Device Synchronization Interval">
+    </div>
+    <div class="form-row node-config-input-attributes-container-row">
+        <label style="width:auto" id="node-config-input-deviceAttributes-container-label"><i class="fa fa-tasks"></i> Attributes And Setters</label>
+        <ol id="node-config-input-deviceAttributes-container"></ol>
+    </div>
+</script>
+
+<script type="text/javascript">
+RED.nodes.registerType('Mi-Other',{
+    category: 'Mi',
+    color: '#996600',
+    defaults: {
+        name: { value: "" },
+        device: { type: "Mi-Other-Device", required: true }
+    },
+    inputs: 1,
+    outputs: 1,
+    icon: "Mi-Other.png",
+    paletteLabel: function() {
+        return this._("Mi-Other.node_list.label.name");
+    },
+    label: function() {
+        return this.name || this._("Mi-Other.node_list.label.name");
+    }
+});
+</script>
+
+<script type="text/x-red" data-template-name="Mi-Other">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-device"><i class="fa fa-cog"></i> Device</label>
+        <input type="text" id="node-input-device">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Mi-Other">
+    <p>XiaoMi Other from node-red-contrib-mi-miio By hang.yin</p>
+    <p>For more information, please refer to <a href='https://github.com/YinHangCode/node-red-contrib-mi-miio' target='_blank'>GitHub</a> or <a href="//shang.qq.com/wpa/qunwpa?idkey=8b9566598f40dd68412065ada24184ef72c6bddaa11525ca26c4e1536a8f2a3d" target='_blank'>QQ Group: 107927710</a></p>
+</script>
+

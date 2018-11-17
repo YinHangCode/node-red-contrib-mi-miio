@@ -113,7 +113,7 @@ class CommonNode {
             return;
         }
         
-        if(!this.deviceNode.online) {
+        if(false == this.deviceNode.online) {
             node.send({
                 'payload':{
                     'cmd': 'set_response',

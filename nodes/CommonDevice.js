@@ -17,10 +17,12 @@ class CommonDevice {
             var attribute = this.getAttributeList()[index];
             this.attributes[attribute] = null;
         }
-        this.syncAttributes();
         
         if(this.config.deviceSyncInterval > 0) {
-            this.syncIntervalFlag = setInterval(this.syncAttributes.bind(this), config.deviceSyncInterval);
+            this.syncAttributes(true);
+            this.syncIntervalFlag = setInterval(this.syncAttributes.bind(this, true), config.deviceSyncInterval);
+        } else {
+            this.syncAttributes(false);
         }
     }
     
@@ -30,9 +32,13 @@ class CommonDevice {
         }
     }
     
-    syncAttributes() {
+    syncAttributes(isUpdateNodeStatus) {
         var that = this;
         var attributeList = this.getAttributeList();
+        if(null == attributeList || Array.isArray(attributeList) == false || attributeList.length == 0) {
+            return;
+        }
+        
         this.device.call("get_prop", attributeList, {
             'options.retries': 1
         }).then(result => {
@@ -59,15 +65,20 @@ class CommonDevice {
                 }
                 that.attributes = newAttributes;
             }
-            that.online = true;
-            for(var node in that.nodes) {
-                that.nodes[node].status({fill:"green", shape:"dot", text: JSON.stringify(that.attributes) });
+            
+            if(isUpdateNodeStatus) {
+                that.online = true;
+                for(var node in that.nodes) {
+                    that.nodes[node].status({fill:"green", shape:"dot", text: JSON.stringify(that.attributes) });
+                }
             }
         }).catch(function(err) {
             that.debug(err);
-            that.online = false;
-            for(var node in that.nodes) {
-                that.nodes[node].status({fill:"red", shape:"ring", text:"offline"});
+            if(isUpdateNodeStatus) {
+                that.online = false;
+                for(var node in that.nodes) {
+                    that.nodes[node].status({fill:"red", shape:"ring", text:"offline"});
+                }
             }
         });
     }
