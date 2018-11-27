@@ -134,7 +134,9 @@ class CommonNode {
             });
             
             var reportMsg = node.getCmdSetReportMsg(node, msg);
-            node.send(reportMsg);
+            for(var sameDeviceNodeId in node.deviceNode.nodes) {
+                node.deviceNode.nodes[sameDeviceNodeId].send(reportMsg);
+            }
             
             node.updateCmdSetAttributes(node, msg, attribute, value);
         }).catch(function(err) {
