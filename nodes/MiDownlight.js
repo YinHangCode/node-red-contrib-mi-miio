@@ -14,7 +14,7 @@ module.exports = function(RED) {
             return [
                 "power",
                 "bright",
-				"cct"
+                "cct"
             ];
         }
         
@@ -22,7 +22,7 @@ module.exports = function(RED) {
             return {
                 "power": "set_power",
                 "bright": "set_bright",
-				"cct":	"set_cct"
+                "cct":	"set_cct"
             };
         }
     };
