@@ -5,7 +5,7 @@ const CommonNode = require('./CommonNode');
 
 module.exports = function(RED) {
 
-    class MiYeelightColorLedStripDevice extends CommonDevice {
+    class PhilipsDownlightDevice extends CommonDevice {
         constructor(config) {
             super(RED, config);
         }
