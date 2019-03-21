@@ -1,10 +1,9 @@
-<!-- XiaoMi/Philips -->
+<!-- Philips -->
 <!-- Philips Downlight -->
 <!-- philips.light.downlight -->
 
-
 <script type="text/javascript">
-    RED.nodes.registerType('Mi-Downlight-Device', {
+    RED.nodes.registerType('Philips-Downlight-Device', {
         category: 'config',
         defaults: {
             deviceName: { value: "" },
@@ -18,7 +17,7 @@
     });
 </script>
 
-<script type="text/x-red" data-template-name="Mi-Downlight-Device">
+<script type="text/x-red" data-template-name="Philips-Downlight-Device">
     <div class="form-row">
         <label for="node-config-input-deviceName"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-config-input-deviceName" placeholder="Device Name">
@@ -38,26 +37,26 @@
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType('Mi-Downlight',{
+    RED.nodes.registerType('Philips-Downlight',{
         category: 'Mi',
         color: '#ff9900',
         defaults: {
             name: { value: "" },
-            device: { type: "Mi-Downlight-Device", required: true }
+            device: { type: "Philips-Downlight-Device", required: true }
         },
         inputs: 1,
         outputs: 1,
-        icon: "Mi-Downlight.png",
+        icon: "Philips-Downlight.png",
         paletteLabel: function() {
-            return this._("Mi-Downlight.node_list.label.name");
+            return this._("Philips-Downlight.node_list.label.name");
         },
         label: function() {
-            return this.name || this._("Mi-Downlight.node_list.label.name");
+            return this.name || this._("Philips-Downlight.node_list.label.name");
         }
     });
 </script>
 
-<script type="text/x-red" data-template-name="Mi-Downlight">
+<script type="text/x-red" data-template-name="Philips-Downlight">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
@@ -68,8 +67,8 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="Mi-Downlight">
-    <p>XiaoMi/Philips Zhurui Downlight from node-red-contrib-mi-miio By hang.yin</p>
+<script type="text/x-red" data-help-name="Philips-Downlight">
+    <p>XiaoMi Philips Downlight from node-red-contrib-mi-miio By hang.yin</p>
     <p>For more information, please refer to <a href='https://github.com/YinHangCode/node-red-contrib-mi-miio' target='_blank'>GitHub</a> or <a href="//shang.qq.com/wpa/qunwpa?idkey=8b9566598f40dd68412065ada24184ef72c6bddaa11525ca26c4e1536a8f2a3d" target='_blank'>QQ Group: 107927710</a></p>
 </script>
 

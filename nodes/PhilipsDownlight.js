@@ -5,7 +5,7 @@ const CommonNode = require('./CommonNode');
 
 module.exports = function(RED) {
 
-    class MiDownlightDevice extends CommonDevice {
+    class MiYeelightColorLedStripDevice extends CommonDevice {
         constructor(config) {
             super(RED, config);
         }
@@ -22,16 +22,17 @@ module.exports = function(RED) {
             return {
                 "power": "set_power",
                 "bright": "set_bright",
-                "cct":	"set_cct"
+                "cct": "set_cct"
+
             };
         }
     };
-    RED.nodes.registerType("Mi-Downlight-Device", MiDownlightDevice);
+    RED.nodes.registerType("Philips-Downlight-Device", PhilipsDownlightDevice);
     
     class MiMiIntelligencePinboard extends CommonNode {
         constructor(config) {
             super(RED, config);
         }
     }
-    RED.nodes.registerType("Mi-Downlight", MiMiIntelligencePinboard);
+    RED.nodes.registerType("Philips-Downlight", MiMiIntelligencePinboard);
 }
