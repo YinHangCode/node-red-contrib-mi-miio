@@ -8,12 +8,14 @@
     "node-red-contrib",
     "xiaomi",
     "mi",
-    "miio"
+    "miio",
+    "Philips"
   ],
   "node-red": {
     "nodes": {
       "MiIntelligencePinboard": "nodes/MiIntelligencePinboard.js",
       "YeelightColorLedStrip": "nodes/YeelightColorLedStrip.js",
+      "PhilipsDownlight": "nodes/PhilipsDownlight.js",
       "ZhiMiDCVariableFrequencyFan": "nodes/ZhiMiDCVariableFrequencyFan.js",
       "Other": "nodes/Other.js"
     }
