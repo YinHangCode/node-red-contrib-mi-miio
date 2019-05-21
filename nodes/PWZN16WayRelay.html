@@ -1,9 +1,9 @@
-<!-- 飞利浦筒灯 -->
-<!-- Mi-PhilipsDownlight -->
-<!-- philips.light.downlight -->
+<!-- 16路继电器 -->
+<!-- Mi-PWZN16WayRelay -->
+<!-- zimi.powerstrip.v2 -->
 
 <script type="text/javascript">
-    RED.nodes.registerType('Mi-PhilipsDownlight-Device', {
+    RED.nodes.registerType('Mi-PWZN16WayRelay-Device', {
         category: 'config',
         defaults: {
             deviceName: { value: "" },
@@ -17,7 +17,7 @@
     });
 </script>
 
-<script type="text/x-red" data-template-name="Mi-PhilipsDownlight-Device">
+<script type="text/x-red" data-template-name="Mi-PWZN16WayRelay-Device">
     <div class="form-row">
         <label for="node-config-input-deviceName"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-config-input-deviceName" placeholder="Device Name">
@@ -37,26 +37,26 @@
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType('Mi-PhilipsDownlight',{
+    RED.nodes.registerType('Mi-PWZN16WayRelay',{
         category: 'Mi',
-        color: '#ff9900',
+        color: '#0066CC',
         defaults: {
             name: { value: "" },
-            device: { type: "Mi-PhilipsDownlight-Device", required: true }
+            device: { type: "Mi-PWZN16WayRelay-Device", required: true }
         },
         inputs: 1,
         outputs: 1,
-        icon: "Mi-PhilipsDownlight.png",
+        icon: "Mi-PWZN16WayRelay.png",
         paletteLabel: function() {
-            return this._("Mi-PhilipsDownlight.node_list.label.name");
+            return this._("Mi-PWZN16WayRelay.node_list.label.name");
         },
         label: function() {
-            return this.name || this._("Mi-PhilipsDownlight.node_list.label.name");
+            return this.name || this._("Mi-PWZN16WayRelay.node_list.label.name");
         }
     });
 </script>
 
-<script type="text/x-red" data-template-name="Mi-PhilipsDownlight">
+<script type="text/x-red" data-template-name="Mi-PWZN16WayRelay">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
@@ -67,8 +67,8 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="Mi-PhilipsDownlight">
-    <p>XiaoMi Philips Downlight from node-red-contrib-mi-miio By luckypoppy</p>
+<script type="text/x-red" data-help-name="Mi-PWZN16WayRelay">
+    <p>XiaoMi PWZN16WayRelay from node-red-contrib-mi-miio By hang.yin</p>
     <p>For more information, please refer to <a href='https://github.com/YinHangCode/node-red-contrib-mi-miio' target='_blank'>GitHub</a> or <a href="//shang.qq.com/wpa/qunwpa?idkey=8b9566598f40dd68412065ada24184ef72c6bddaa11525ca26c4e1536a8f2a3d" target='_blank'>QQ Group: 107927710</a></p>
 </script>
 

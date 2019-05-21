@@ -1,8 +1,8 @@
 {
-  "Philips-Downlight": {
+  "Mi-PhilipsDownlight": {
     "node_list": {
       "label": {
-        "name": "PhilipsDownlight"
+        "name": "飞利浦筒灯"
       }
     }
   }

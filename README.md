@@ -12,8 +12,11 @@ Bug反馈/建议等请提交[issues](https://github.com/YinHangCode/node-red-con
 |1|米家智能插线板|MiIntelligencePinboard|zimi.powerstrip.v2|
 |2|Yeelight彩光灯带|YeelightColorLedStrip|yeelink.light.strip1<br>yeelink.light.strip2|
 |3|智米直流变频落地扇|ZhiMiDCVariableFrequencyFan|zhimi.fan.v3|
+|4|小米飞利浦筒灯|PhilipsDownlight|philips.light.downlight|
+|5|16路继电器|16WayRelay|pwzn.relay.apple|
+|N|自定义设备|Other|***|
 
-更多设备待添加中。。。
+自定义设备可以自行添加设备属性，来实现控制目前插件暂不支持的设备。
 
 ## 安装
 确认安装好Node-RED之后，执行如下命令：
@@ -124,6 +127,9 @@ attributes为值有变动的属性，oldValues为变动前各属性的值，newV
 ```
    
 ## 版本说明
+### 0.0.5 (2019-05-21)
+1. 增加对飞利浦筒灯的支持。
+2. 增加对16路继电器的支持。
 ### 0.0.4 (2018-11-27)
 1. 修复了set设备值，有些node结点收不到report消息的bug。
 ### 0.0.3 (2018-11-15)
