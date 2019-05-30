@@ -117,7 +117,7 @@ class CommonNode {
         }
         
         var setterAndValue = this.cmdSetGetSetterAndValue(node, msg);
-        var setter = setterAndValue || setterAndValue['setter'];
+        var setter = setterAndValue && setterAndValue['setter'];
         if(null == setter) {
             node.send({
                 'payload':{
@@ -126,7 +126,7 @@ class CommonNode {
                 }
             });
         }
-        var value = setterAndValue || setterAndValue['value'];
+        var value = setterAndValue && setterAndValue['value'];
         if(null == value) {
             node.send({
                 'payload':{
@@ -135,7 +135,7 @@ class CommonNode {
                 }
             });
         }
-        
+
         this.deviceNode.device.call(setter, [value]).then(result => {
             node.send({
                 'payload': {

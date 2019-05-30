@@ -13,7 +13,7 @@ Bug反馈/建议等请提交[issues](https://github.com/YinHangCode/node-red-con
 |2|Yeelight彩光灯带|YeelightColorLedStrip|yeelink.light.strip1<br>yeelink.light.strip2|
 |3|智米直流变频落地扇|ZhiMiDCVariableFrequencyFan|zhimi.fan.v3|
 |4|小米飞利浦筒灯|PhilipsDownlight|philips.light.downlight|
-|5|16路继电器|16WayRelay|pwzn.relay.apple|
+|5|16路继电器|PWZN16WayRelay|pwzn.relay.apple|
 |N|自定义设备|Other|***|
 
 自定义设备可以自行添加设备属性，来实现控制目前插件暂不支持的设备。
