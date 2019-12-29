@@ -14,6 +14,7 @@ Bug反馈/建议等请提交[issues](https://github.com/YinHangCode/node-red-con
 |3|智米直流变频落地扇|ZhiMiDCVariableFrequencyFan|zhimi.fan.v3|
 |4|小米飞利浦筒灯|PhilipsDownlight|philips.light.downlight|
 |5|16路继电器|PWZN16WayRelay|pwzn.relay.apple|
+|6|米家智能插座wifi|ChuangmiPlug|chuangmi.plug.m1|
 |N|自定义设备|Other|***|
 
 自定义设备可以自行添加设备属性，来实现控制目前插件暂不支持的设备。
@@ -136,6 +137,8 @@ attributes为值有变动的属性，oldValues为变动前各属性的值，newV
 ![案例图片](./images/airmonitor_b1.png)
 
 ## 版本说明
+### 0.0.7 (2019-12-29)
+1. 增加对米家无线插座的支持（型号：chuangmi.plug.m1）
 ### 0.0.6 (2019-12-29)
 1. 增加对米家空气检测仪的案例（型号：cgllc.airmonitor.b1）
 ### 0.0.5 (2019-05-21)

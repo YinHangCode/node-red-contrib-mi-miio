@@ -79,22 +79,6 @@ class CommonNode {
         }
     }
     
-    cmdSetGetSetter(node, msg) {
-        var attribute = msg.payload['attribute'];
-        return this.deviceNode.getAttributeSetter()[attribute];
-    }
-    
-    cmdSetGetValue(node, msg) {
-        return msg.payload['value'];
-    }
-    
-    cmdSetGetSetterAndValue(node, msg) {
-        return {
-            'setter': this.cmdSetGetSetter(node, msg),
-            'value': this.cmdSetGetValue(node, msg)
-        }
-    }
-    
     cmdSet(node, msg) {
         var attribute = msg.payload['attribute'];
         if(null == attribute || attribute == "") {
@@ -104,6 +88,29 @@ class CommonNode {
                     'msg': 'attribute is empty.'
                 }
             });
+            return;
+        }
+                
+        var value = msg.payload['value'];
+        if(null == value) {
+            node.send({
+                'payload':{
+                    'cmd': 'error',
+                    'msg': 'value is empty.'
+                }
+            });
+            return;
+        }
+        
+        var setter = this.deviceNode.getAttributeSetter()[attribute];
+        if(null == setter) {
+            node.send({
+                'payload':{
+                    'cmd': 'error',
+                    'msg': attribute + ' is not support set.'
+                }
+            });
+            return;
         }
         
         if(false == this.deviceNode.online) {
@@ -114,28 +121,9 @@ class CommonNode {
                     'msg': 'device is offline.'
                 }
             });
+            return;
         }
         
-        var setterAndValue = this.cmdSetGetSetterAndValue(node, msg);
-        var setter = setterAndValue && setterAndValue['setter'];
-        if(null == setter) {
-            node.send({
-                'payload':{
-                    'cmd': 'error',
-                    'msg': attribute + ' is not support set.'
-                }
-            });
-        }
-        var value = setterAndValue && setterAndValue['value'];
-        if(null == value) {
-            node.send({
-                'payload':{
-                    'cmd': 'error',
-                    'msg': 'value is empty.'
-                }
-            });
-        }
-
         this.deviceNode.device.call(setter, [value]).then(result => {
             node.send({
                 'payload': {
