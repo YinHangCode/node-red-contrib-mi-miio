@@ -1,4 +1,3 @@
-
 class CommonNode {
     constructor(RED, config) {
         RED.nodes.createNode(this, config);
