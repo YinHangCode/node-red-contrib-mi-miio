@@ -18,21 +18,30 @@ module.exports = function(RED) {
             return {};
         }
         
+        getSyncAttributesMethod() {
+            return "get_air_data";
+        }
         
+        getSyncAttributesValue() {
+            return [];
+        }
+        
+        getSyncAttributesResult(response) {
+            var result = [];
+            var attributeList = this.getAttributeList();
+            for(var index in attributeList) {
+                var attribute = attributeList[index];
+                result.push(response[attribute]);
+            }
+            
+            return result;
+        }
     };
     RED.nodes.registerType("Mi-MiAirMonitorB1-Device", MiMiAirMonitorB1Device);
     
     class MiMiAirMonitorB1 extends CommonNode {
         constructor(config) {
             super(RED, config);
-        }
-        
-        getCmdGetMethod(node, msg) {
-            return "get_air_data";
-        }
-
-        getCmdGetValue(node, msg) {
-            return [];
         }
     }
     RED.nodes.registerType("Mi-MiAirMonitorB1", MiMiAirMonitorB1);

@@ -3,9 +3,9 @@
 [![npm version](https://badge.fury.io/js/node-red-contrib-mi-miio.svg)](https://badge.fury.io/js/node-red-contrib-mi-miio)
 [![release version](https://img.shields.io/badge/releases-0.0.6-blue.svg)](https://github.com/YinHangCode/node-red-contrib-mi-miio)
 [![dev version](https://img.shields.io/badge/dev-0.0.6-yellow.svg)](https://github.com/YinHangCode/node-red-contrib-mi-miio/tree/dev)
-[![npm version](https://img.shields.io/badge/donate-AliPay-green.svg)](https://github.com/YinHangCode/homebridge-mi-aqara/blob/master/images/Donate-AliPay.jpg)
-[![npm version](https://img.shields.io/badge/donate-WeChat-green.svg)](https://github.com/YinHangCode/homebridge-mi-aqara/blob/master/images/Donate-WeChat.jpg)
-[![npm version](https://img.shields.io/badge/donate-PayPal-green.svg)](https://www.paypal.me/yhdeserteagle)
+[![donate alipay](https://img.shields.io/badge/donate-AliPay-green.svg)](https://github.com/YinHangCode/homebridge-mi-aqara/blob/master/images/Donate-AliPay.jpg)
+[![donate wechat](https://img.shields.io/badge/donate-WeChat-green.svg)](https://github.com/YinHangCode/homebridge-mi-aqara/blob/master/images/Donate-WeChat.jpg)
+[![donate paypal](https://img.shields.io/badge/donate-PayPal-green.svg)](https://www.paypal.me/yhdeserteagle)
 
 这是一个Node-RED的小米MiIO设备的插件。
    

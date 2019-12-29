@@ -33,17 +33,13 @@ class CommonNode {
         this.deviceNode.removeNode(this.nodeId);
     }
     
-    getCmdGetMethod(node, msg) {
-        return "get_prop";
-    }
-    
-    getCmdGetValue(node, msg) {
-        return this.deviceNode.getAttributeList();
-    }
-    
     cmdGet(node, msg) {
+        var that = this;
         if(null == this.deviceNode.online) {
-            this.deviceNode.device.call(this.getCmdGetMethod(node, msg), this.getCmdGetValue(node, msg)).then(result => {
+            var cmdGetMethod = this.deviceNode.getSyncAttributesMethod();
+            var cmdGetValue = this.deviceNode.getSyncAttributesValue();
+            this.deviceNode.device.call(cmdGetMethod, cmdGetValue).then(response => {
+                var result = that.deviceNode.getSyncAttributesResult(response);
                 var attributeList = this.deviceNode.getAttributeList();
                 var results = {};
                 for(var index in attributeList) {

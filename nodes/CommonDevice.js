@@ -4,6 +4,8 @@ class CommonDevice {
     constructor(RED, config) {
         RED.nodes.createNode(this, config);
         
+        config.deviceSyncInterval = parseInt(config.deviceSyncInterval);
+        
         this.config = config;
         this.device = new miio.Device({
             address: this.config.deviceIP,
@@ -40,6 +42,10 @@ class CommonDevice {
         return this.getAttributeList();
     }
     
+    getSyncAttributesResult(response) {
+        return response;
+    }
+    
     syncAttributes(isUpdateNodeStatus) {
         var that = this;
         var attributeList = this.getAttributeList();
@@ -47,9 +53,12 @@ class CommonDevice {
             return;
         }
         
-        this.device.call(this.getSyncAttributesMethod(), this.getSyncAttributesValue(), {
-            'options.retries': 1
-        }).then(result => {
+        var syncAttributesMethod = this.getSyncAttributesMethod();
+        var syncAttributesValue = this.getSyncAttributesValue();
+        this.device.call(syncAttributesMethod, syncAttributesValue, {
+            'retries': 1
+        }).then(response => {
+            var result = that.getSyncAttributesResult(response);
             var changeAttributes = [];
             var newAttributes = {};
             for(var index in attributeList) {
@@ -81,7 +90,7 @@ class CommonDevice {
                 }
             }
         }).catch(function(err) {
-            that.debug(err);
+            console.error(err);
             if(isUpdateNodeStatus) {
                 that.online = false;
                 for(var node in that.nodes) {
