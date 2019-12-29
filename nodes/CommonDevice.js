@@ -32,6 +32,14 @@ class CommonDevice {
         }
     }
     
+    getSyncAttributesMethod() {
+        return "get_prop";
+    }
+    
+    getSyncAttributesValue() {
+        return this.getAttributeList();
+    }
+    
     syncAttributes(isUpdateNodeStatus) {
         var that = this;
         var attributeList = this.getAttributeList();
@@ -39,7 +47,7 @@ class CommonDevice {
             return;
         }
         
-        this.device.call("get_prop", attributeList, {
+        this.device.call(this.getSyncAttributesMethod(), this.getSyncAttributesValue(), {
             'options.retries': 1
         }).then(result => {
             var changeAttributes = [];

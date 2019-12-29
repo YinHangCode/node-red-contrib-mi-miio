@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-mi-miio",
-  "version": "0.0.7",
+  "version": "0.0.6",
   "description": "Node-RED contrib for mi miio device.",
   "author": "hang.yin",
   "keywords": [
@@ -19,6 +19,7 @@
       "PhilipsDownlight": "nodes/PhilipsDownlight.js",
       "PWZN16WayRelay": "nodes/PWZN16WayRelay.js",
       "ChuangmiPlug": "nodes/ChuangmiPlug.js",
+      "MiAirMonitorB1": "nodes/MiAirMonitorB1.js",
       "Other": "nodes/Other.js"
     }
   },

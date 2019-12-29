@@ -1,9 +1,9 @@
-<!-- 米家智能插座 -->
-<!-- ChuangmiPlug -->
-<!-- chuangmi.plug.m1 chuangmi.plug.m3 chuangmi.plug.v2 chuangmi.plug.v3 chuangmi.plug.v1 -->
+<!-- 米家空气检测仪B1 -->
+<!-- Mi-MiAirMonitorB1 -->
+<!-- cgllc.airmonitor.b1 -->
 
 <script type="text/javascript">
-    RED.nodes.registerType('ChuangmiPlug-Device', {
+    RED.nodes.registerType('Mi-MiAirMonitorB1-Device', {
         category: 'config',
         defaults: {
             deviceName: { value: "" },
@@ -17,7 +17,7 @@
     });
 </script>
 
-<script type="text/x-red" data-template-name="ChuangmiPlug-Device">
+<script type="text/x-red" data-template-name="Mi-MiAirMonitorB1-Device">
     <div class="form-row">
         <label for="node-config-input-deviceName"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-config-input-deviceName" placeholder="Device Name">
@@ -37,26 +37,26 @@
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType('ChuangmiPlug',{
+    RED.nodes.registerType('Mi-MiAirMonitorB1',{
         category: 'Mi',
-        color: '#66CCFF',
+        color: '#77CCFF',
         defaults: {
             name: { value: "" },
-            device: { type: "ChuangmiPlug-Device", required: true }
+            device: { type: "Mi-MiAirMonitorB1-Device", required: true }
         },
         inputs: 1,
         outputs: 1,
-        icon: "Mi-ChuangmiPlug.png",
+        icon: "Mi-MiAirMonitorB1.png",
         paletteLabel: function() {
-            return this._("Mi-ChuangmiPlug.node_list.label.name");
+            return this._("Mi-MiAirMonitorB1.node_list.label.name");
         },
         label: function() {
-            return this.name || this._("Mi-ChuangmiPlug.node_list.label.name");
+            return this.name || this._("Mi-MiAirMonitorB1.node_list.label.name");
         }
     });
 </script>
 
-<script type="text/x-red" data-template-name="ChuangmiPlug">
+<script type="text/x-red" data-template-name="Mi-MiAirMonitorB1">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
@@ -67,8 +67,8 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="ChuangmiPlug">
-    <p>XiaoMi ChuangmiPlug from node-red-contrib-mi-miio By hang.yin</p>
+<script type="text/x-red" data-help-name="Mi-MiAirMonitorB1">
+    <p>XiaoMi MiAirMonitorB1 from node-red-contrib-mi-miio By hang.yin</p>
     <p>For more information, please refer to <a href='https://github.com/YinHangCode/node-red-contrib-mi-miio' target='_blank'>GitHub</a> or <a href="//shang.qq.com/wpa/qunwpa?idkey=8b9566598f40dd68412065ada24184ef72c6bddaa11525ca26c4e1536a8f2a3d" target='_blank'>QQ Group: 107927710</a></p>
 </script>
 

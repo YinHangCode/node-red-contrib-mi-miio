@@ -33,10 +33,18 @@ class CommonNode {
         this.deviceNode.removeNode(this.nodeId);
     }
     
+    getCmdGetMethod(node, msg) {
+        return "get_prop";
+    }
+    
+    getCmdGetValue(node, msg) {
+        return this.deviceNode.getAttributeList();
+    }
+    
     cmdGet(node, msg) {
         if(null == this.deviceNode.online) {
-            var attributeList = this.deviceNode.getAttributeList();
-            this.deviceNode.device.call("get_prop", attributeList).then(result => {
+            this.deviceNode.device.call(this.getCmdGetMethod(node, msg), this.getCmdGetValue(node, msg)).then(result => {
+                var attributeList = this.deviceNode.getAttributeList();
                 var results = {};
                 for(var index in attributeList) {
                     results[attributeList[index]] = result[index];
@@ -78,19 +86,19 @@ class CommonNode {
         }
     }
     
-    cmdSetGetSetter(node, msg) {
+    getCmdSetSetter(node, msg) {
         var attribute = msg.payload['attribute'];
         return this.deviceNode.getAttributeSetter()[attribute];
     }
     
-    cmdSetGetValue(node, msg) {
+    getCmdSetValue(node, msg) {
         return msg.payload['value'];
     }
     
-    cmdSetGetSetterAndValue(node, msg) {
+    getCmdSetSetterAndValue(node, msg) {
         return {
-            'setter': this.cmdSetGetSetter(node, msg),
-            'value': this.cmdSetGetValue(node, msg)
+            'setter': this.getCmdSetSetter(node, msg),
+            'value': this.getCmdSetValue(node, msg)
         }
     }
     
@@ -115,7 +123,7 @@ class CommonNode {
             });
         }
         
-        var setterAndValue = this.cmdSetGetSetterAndValue(node, msg);
+        var setterAndValue = this.getCmdSetSetterAndValue(node, msg);
         var setter = setterAndValue && setterAndValue['setter'];
         if(null == setter) {
             node.send({
